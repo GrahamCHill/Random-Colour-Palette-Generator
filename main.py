@@ -5,75 +5,10 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
 
-# Hyperpop color palette
-BASE_COLORS = [
-    # Core originals
-    ("Electric Pink", "#FF00C8"),
-    ("Toxic Lime", "#C8FF00"),
-    ("Sky Slush Blue", "#00EFFF"),
-    ("Chrome Lavender", "#D2A1FF"),
-    ("Digital Grape", "#8000FF"),
-    ("Retina Burn Red", "#FF1F1F"),
-    ("Bubblegum White", "#FDFDFF"),
-    ("Blacklight Void", "#0A0033"),
-    ("Glitch Yellow", "#FFFB00"),
-    ("Soft Cyan Dream", "#9EFFF7"),
-    ("Neon Coral", "#FF6EFF"),
-    ("Cyber Mint", "#99FFCC"),
-    ("Blushcore", "#FF85A1"),
-    ("Plastic Peach", "#FFD6F6"),
-
-    # Additional aesthetic chaos
-    ("Slime Vibe Green", "#00FF99"),
-    ("Overdrive Orange", "#FF7700"),
-    ("Nuclear Frost", "#CCFFFF"),
-    ("Laser Lemon", "#FFFF33"),
-    ("Candyblood Red", "#FF3366"),
-    ("Tamagotchi Teal", "#00FFDD"),
-    ("Cotton Candy Fog", "#FFCCFF"),
-    ("Ice Pop Purple", "#CC99FF"),
-    ("Sunshock Yellow", "#FFF700"),
-    ("Synthetic Rose", "#FF007F"),
-    ("Hyper Ice", "#B6F7FF"),
-    ("Pixel Dust", "#F5E3FF"),
-    ("8bit Blood", "#D90037"),
-    ("Noise Turquoise", "#00FFE5"),
-    ("Chroma Blast", "#FD00FF"),
-    ("Acid Rain", "#BFFF00"),
-    ("Meme Slime", "#00FFB2"),
-    ("Overheat Orange", "#FF5500"),
-    ("Ghost Glow", "#D0FFFF"),
-    ("Bluetooth Blue", "#3399FF"),
-    ("Lavender Circuit", "#E3B9FF"),
-    ("Sugar Rush Pink", "#FFAACC"),
-    ("Twitch Purple", "#9146FF"),
-    ("Sour Byte", "#BFFFBA"),
-    ("Pop Pixel Pink", "#FF66B2"),
-    ("Ultra Cyan", "#00FFFF"),
-    ("Synthetic Strawberry", "#FF4D6D"),
-    ("Toxic Cotton", "#E6FFB8"),
-    ("Pastel Battery", "#F6FFD7"),
-    ("Corrosive Mango", "#FFB84D"),
-    ("Electro Magenta", "#FF008C"),
-    ("Radioactive Teal", "#00FFD1"),
-    ("Hard Light Rose", "#F08080"),
-    ("Skater Mint", "#D2FFE3"),
-    ("Arcade Lava", "#FF4500"),
-    ("Cursed Plasma", "#B300FF"),
-    ("Blinding Fizz", "#FFFFE0"),
-    ("Supernova Citrus", "#FFF200"),
-    ("Heatwave Pink", "#FF5FA2"),
-    ("Power Surge", "#FF00E6"),
-    ("Artificial Lemonade", "#FCFF6C"),
-    ("Unicorn Noise", "#FCE1FF"),
-]
-
-
-
 class PaletteGenerator(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Hyperpop Palette Generator")
+        self.setWindowTitle("Palette Generator")
         self.setGeometry(100, 100, 800, 600)
 
         self.loaded_colors = []
@@ -108,7 +43,7 @@ class PaletteGenerator(QtWidgets.QMainWindow):
         control_layout.addWidget(self.count_spin)
 
         self.source_combo = QtWidgets.QComboBox()
-        self.source_combo.addItems(["Base Palette Only", "Loaded Palette Only", "Mixed Palette"])
+        self.source_combo.addItems(["Loaded Palette Only"])
         control_layout.addWidget(QtWidgets.QLabel("Source:"))
         control_layout.addWidget(self.source_combo)
 
@@ -144,12 +79,7 @@ class PaletteGenerator(QtWidgets.QMainWindow):
         count = self.count_spin.value()
         source_mode = self.source_combo.currentText()
 
-        if source_mode == "Base Palette Only":
-            available_colors = BASE_COLORS.copy()
-        elif source_mode == "Loaded Palette Only":
-            available_colors = self.loaded_colors.copy()
-        else:
-            available_colors = BASE_COLORS + self.loaded_colors
+        available_colors = self.loaded_colors.copy()
 
         if len(available_colors) < count:
             QtWidgets.QMessageBox.warning(self, "Not enough colors", "Not enough colors to generate the requested palette.")
