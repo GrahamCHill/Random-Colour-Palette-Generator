@@ -15,3 +15,5 @@ colour palette, you can do so with this application.
 - Pillow
 - Currently, pyQt5, but will be ported to PySide6 in the future
 
+<!-- pip freeze > requirements.txt -->
+Requirements will be updated as the project progresses.
